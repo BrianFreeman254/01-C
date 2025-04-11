@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Special Story ❤️</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary-color: #ff6f91;
+      --primary-dark: #ff4b73;
+      --bg-gradient-start: #ff9a9e;
+      --bg-gradient-end: #fad0c4;
+      --text-dark: #333;
+      --text-light: #777;
+      --white: #fff;
+      --container-shadow: 0 10px 30px rgba(0, 0, 0, 0.15), 0 0 40px rgba(255, 105, 135, 0.3);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      user-select: none;
+    }
+    
+    body {
+      font-family: 'Poppins', 'Arial', sans-serif;
+      background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow-x: hidden;
+      transition: background 0.5s ease;
+      position: relative;
+    }
+    
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+      z-index: -1;
+    }
+    
+    .container {
+      display: none;
+      text-align: center;
+      width: 90%;
+      max-width: 800px;
+      background: rgba(255, 255, 255, 0.97);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: var(--container-shadow);
+      backdrop-filter: blur(10px);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.5s ease;
+    }
+    
+    .container::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, var(--primary-color), var(--primary-dark), var(--primary-color));
+      border-radius: 0 0 20px 20px;
+    }
+    
+    h1 {
+      font-size: clamp(1.8rem, 5vw, 2.8rem);
+      color: var(--primary-color);
+      margin-bottom: 25px;
+      text-shadow: 2px 2px 8px rgba(255, 105, 135, 0.3);
+      font-weight: 700;
+      position: relative;
+      display: inline-block;
+    }
+    
+    h1::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: -10px;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary-color), var(--primary-dark));
+      border-radius: 2px;
+    }
+    
+    p {
+      font-size: clamp(1rem, 3vw, 1.2rem);
+      color: var(--text-dark);
+      line-height: 1.9;
+      margin-bottom: 20px;
+      display: none;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    
+    p.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    button {
+      padding: 12px 28px;
+      font-size: 1.1rem;
+      background: linear-gradient(45deg, var(--primary-color), var(--primary-dark));
+      color: var(--white);
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      margin-top: 25px;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(255, 111, 145, 0.4);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: 0.6s;
+    }
+    
+    button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(255, 111, 145, 0.6);
+    }
+    
+    button:hover::before {
+      left: 100%;
+    }
+    
+    button:active {
+      transform: translateY(0);
+    }
+    
+    .pin-container {
+      text-align: center;
+      background: rgba(255, 255, 255, 0.97);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: var(--container-shadow);
+      width: 90%;
+      max-width: 400px;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+    }
+    
+    .pin-container::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, var(--primary-color), var(--primary-dark), var(--primary-color));
+      border-radius: 0 0 20px 20px;
+    }
+    
+    .security-icon {
+      font-size: 3rem;
+      color: var(--primary-color);
+      margin-bottom: 15px;
+    }
+    
+    .pin-input-container {
+      display: flex;
+      justify-content: center;
+      margin: 20px 0;
+    }
+    
+    .pin-digit {
+      width: 45px;
+      height: 55px;
+      margin: 0 5px;
+      font-size: 1.4rem;
+      text-align: center;
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+    
+    .pin-digit:focus {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 5px rgba(255, 111, 145, 0.5);
+    }
+    
+    #wrong-pin {
+      color: #ff3333;
+      margin-top: 15px;
+      display: none;
+      animation: shake 0.5s ease-in-out;
+    }
+    
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+      20%, 40%, 60%, 80% { transform: translateX(5px); }
+    }
+    
+    audio {
+      margin-top: 25px;
+      width: 100%;
+      max-width: 300px;
+      border-radius: 50px;
+      display: none;
+    }
+    
+    audio::-webkit-media-controls-panel {
+      background-color: rgba(255, 111, 145, 0.1);
+    }
+    
+    .copyright {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      margin-top: 30px;
+      opacity: 0.8;
+    }
+    
+    .floating-hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: -1;
+      pointer-events: none;
+    }
+    
+    .heart {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='rgba(255,111,145,0.6)' d='M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z'%3E%3C/path%3E%3C/svg%3E");
+      background-size: contain;
+      opacity: 0;
+      animation: floating 10s linear infinite;
+    }
+    
+    @keyframes floating {
+      0% {
+        opacity: 0;
+        transform: translateY(0) rotate(0deg);
+      }
+      10% {
+        opacity: 0.7;
+      }
+      90% {
+        opacity: 0.7;
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-100vh) rotate(360deg);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 20px 15px;
+      }
+      
+      .pin-digit {
+        width: 40px;
+        height: 50px;
+        font-size: 1.2rem;
+      }
+    }
+    
+    /* Modern scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: var(--primary-color);
+      border-radius: 10px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--primary-dark);
+    }
+    
+    /* Loading animation */
+    .loading {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    
+    .loading-spinner {
+      width: 50px;
+      height: 50px;
+      border: 5px solid rgba(255, 111, 145, 0.3);
+      border-radius: 50%;
+      border-top-color: var(--primary-color);
+      animation: spin 1s ease-in-out infinite;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body oncontextmenu="return false">
+  <div class="floating-hearts" id="floating-hearts"></div>
+  
+  <div class="loading" id="loading">
+    <div class="loading-spinner"></div>
+  </div>
+
+  <div class="pin-container" id="pin-container">
+    <div class="security-icon">
+      <i class="fas fa-lock"></i>
+    </div>
+    <h1>Secure Access</h1>
+    <p>Enter PIN to access your special note</p>
+    
+    <div class="pin-input-container">
+      <input type="password" class="pin-digit" maxlength="1" id="pin-1" autofocus>
+      <input type="password" class="pin-digit" maxlength="1" id="pin-2">
+      <input type="password" class="pin-digit" maxlength="1" id="pin-3">
+      <input type="password" class="pin-digit" maxlength="1" id="pin-4">
+    </div>
+    
+    <button onclick="verifyPin()">Unlock <i class="fas fa-heart"></i></button>
+    <p id="wrong-pin"><i class="fas fa-exclamation-circle"></i> Incorrect PIN. Please try again.</p>
+    
+    <div class="copyright">
+      Secured with ❤️ | Attempts remaining: <span id="attempts">5</span>
+    </div>
+  </div>
+
+  <div class="container" id="note-container">
+    <h1>Our Special Story ❤️</h1>
+    <p id="para-1">
+      It was something we both didn't expect—that we would one day fall in love.  
+      We were just friends, normal friends, who interacted online but not much.
+    </p>
+    <p id="para-2">
+      One day, I realized you were the person I wanted in my life.  
+      We met for the first time on <b>1st November</b> at Shopping Centre in Kenyatta University.  
+      At that moment, I could feel how special you were to me.
+    </p>
+    <p id="para-3">
+      It has been <b><span id="days-counter">164</span> days</b> since that day, and now we meet again today.  
+      I'll never forget how shy you were, how you faced the wall so others couldn't see you.  
+      That moment made me realize how precious and unique you are.
+    </p>
+    <p id="para-4">
+      Sharlyn, you have made these days some of the happiest in my life, and I'm so grateful for every moment with you.  
+      I promise to cherish and love you always.
+    </p>
+    <button onclick="revealNextParagraph()">Tap to Reveal the Next Part <i class="fas fa-chevron-right"></i></button>
+    <audio id="bg-music" controls loop>
+      <source src="music.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+    <div class="copyright">
+      © 2025 Brian and Sharlyn. All Rights Reserved.
+    </div>
+  </div>
+
+  <script>
+    // Prevent right-click on the entire page
+    document.addEventListener('contextmenu', event => event.preventDefault());
+    
+    // Prevent keyboard shortcut copying
+    document.addEventListener('keydown', function(e) {
+      if ((e.ctrlKey || e.metaKey) && (e.key === 'c' || e.key === 's' || e.key === 'u' || e.key === 'p')) {
+        e.preventDefault();
+        return false;
+      }
+    });
+    
+    // Security Variables
+    const correctPin = "2005";
+    const pinDigits = document.querySelectorAll('.pin-digit');
+    const wrongPinMessage = document.getElementById("wrong-pin");
+    const pinContainer = document.getElementById("pin-container");
+    const noteContainer = document.getElementById("note-container");
+    const music = document.getElementById("bg-music");
+    const loading = document.getElementById("loading");
+    const attemptsDisplay = document.getElementById("attempts");
+    let attempts = 5;
+    let currentParagraph = 0;
+    let isLocked = false;
+    let lockoutTimer = null;
+    
+    // Auto-focus between PIN fields
+    pinDigits.forEach((digit, index) => {
+      digit.addEventListener('input', function() {
+        if (this.value.length === this.maxLength) {
+          if (index < pinDigits.length - 1) {
+            pinDigits[index + 1].focus();
+          }
+        }
+      });
+      
+      digit.addEventListener('keydown', function(e) {
+        // Handle backspace to go to previous input
+        if (e.key === 'Backspace' && this.value.length === 0 && index > 0) {
+          pinDigits[index - 1].focus();
+        }
+        
+        // Submit on Enter key
+        if (e.key === 'Enter') {
+          verifyPin();
+        }
+      });
+    });
+    
+    // PIN verification function with enhanced security
+    function verifyPin() {
+      if (isLocked) {
+        showError("Too many attempts. Please try again later.");
+        return;
+      }
+      
+      const enteredPin = Array.from(pinDigits).map(input => input.value).join('');
+      
+      if (enteredPin === correctPin) {
+        wrongPinMessage.style.display = "none";
+        pinContainer.style.display = "none";
+        loading.style.display = "block";
+        
+        // Simulate loading for security theater
+        setTimeout(() => {
+          loading.style.display = "none";
+          noteContainer.style.display = "block";
+          music.style.display = "block";
+          music.play().catch(e => console.log("Autoplay prevented: User interaction required"));
+          
+          // Calculate days since November 1, 2023
+          updateDaysCounter();
+          
+          // Start the heart animation
+          createHearts();
+          
+          // Reveal the first paragraph immediately
+          revealNextParagraph();
+        }, 1500);
+      } else {
+        attempts--;
+        attemptsDisplay.textContent = attempts;
+        
+        // Handle failed attempts
+        if (attempts <= 0) {
+          lockAccount();
+        } else {
+          showError("Incorrect PIN. Please try again.");
+          // Clear all inputs
+          pinDigits.forEach(input => input.value = '');
+          pinDigits[0].focus();
+        }
+      }
+    }
+    
+    // Lock account after too many attempts
+    function lockAccount() {
+      isLocked = true;
+      showError("Too many attempts. Account locked for 30 seconds.");
+      
+      pinDigits.forEach(input => {
+        input.disabled = true;
+        input.value = '';
+      });
+      
+      document.querySelector('.pin-container button').disabled = true;
+      
+      // Set a timer to unlock
+      lockoutTimer = setTimeout(() => {
+        isLocked = false;
+        attempts = 5;
+        attemptsDisplay.textContent = attempts;
+        pinDigits.forEach(input => input.disabled = false);
+        document.querySelector('.pin-container button').disabled = false;
+        wrongPinMessage.style.display = "none";
+        pinDigits[0].focus();
+      }, 30000); // 30 seconds lockout
+    }
+    
+    // Show error message with animation
+    function showError(message) {
+      wrongPinMessage.textContent = message;
+      wrongPinMessage.style.display = "block";
+      wrongPinMessage.style.animation = 'none';
+      setTimeout(() => {
+        wrongPinMessage.style.animation = 'shake 0.5s ease-in-out';
+      }, 10);
+    }
+    
+    // Calculate and update days counter
+    function updateDaysCounter() {
+      const startDate = new Date(2023, 10, 1); // November 1, 2023 (month is 0-indexed)
+      const today = new Date();
+      const differenceInTime = today - startDate;
+      const differenceInDays = Math.floor(differenceInTime / (1000 * 3600 * 24));
+      
+      document.getElementById('days-counter').textContent = differenceInDays;
+    }
+    
+    // Create floating hearts animation
+    function createHearts() {
+      const floatingHearts = document.getElementById('floating-hearts');
+      
+      // Create 20 hearts
+      for (let i = 0; i < 20; i++) {
+        setTimeout(() => {
+          const heart = document.createElement('div');
+          heart.classList.add('heart');
+          
+          // Random position, size and animation duration
+          const size = Math.random() * 20 + 15;
+          const left = Math.random() * 100;
+          const animationDuration = Math.random() * 10 + 5;
+          
+          heart.style.left = `${left}%`;
+          heart.style.bottom = '-50px';
+          heart.style.width = `${size}px`;
+          heart.style.height = `${size}px`;
+          heart.style.animationDuration = `${animationDuration}s`;
+          heart.style.animationDelay = `${Math.random() * 5}s`;
+          
+          floatingHearts.appendChild(heart);
+          
+          // Remove heart after animation completes
+          setTimeout(() => {
+            heart.remove();
+          }, animationDuration * 1000);
+        }, i * 1000);
+      }
+      
+      // Continue creating hearts periodically
+      setInterval(createHeartBatch, 10000);
+    }
+    
+    function createHeartBatch() {
+      const floatingHearts = document.getElementById('floating-hearts');
+      
+      for (let i = 0; i < 5; i++) {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        
+        const size = Math.random() * 20 + 15;
+        const left = Math.random() * 100;
+        const animationDuration = Math.random() * 10 + 5;
+        
+        heart.style.left = `${left}%`;
+        heart.style.bottom = '-50px';
+        heart.style.width = `${size}px`;
+        heart.style.height = `${size}px`;
+        heart.style.animationDuration = `${animationDuration}s`;
+        
+        floatingHearts.appendChild(heart);
+        
+        setTimeout(() => {
+          heart.remove();
+        }, animationDuration * 1000);
+      }
+    }
+    
+    // Reveal paragraphs one by one with animation
+    function revealNextParagraph() {
+      const paragraphs = document.querySelectorAll("#note-container p");
+      
+      if (currentParagraph < paragraphs.length) {
+        const paragraph = paragraphs[currentParagraph];
+        paragraph.style.display = "block";
+        
+        // Trigger animation
+        setTimeout(() => {
+          paragraph.classList.add('visible');
+        }, 50);
+        
+        currentParagraph++;
+        
+        // Hide button if all paragraphs are revealed
+        if (currentParagraph >= paragraphs.length) {
+          document.querySelector("#note-container button").style.display = "none";
+        }
+      }
+    }
+    
+    // Window load event
+    window.addEventListener('load', function() {
+      pinDigits[0].focus(); // Auto-focus first PIN field on load
+    });
+  </script>
+</body>
+</html>
