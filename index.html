@@ -3,18 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Our Special Story ❤️</title>
+  <title>Our Special Journey ❤️</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
       --primary-color: #ff6f91;
       --primary-dark: #ff4b73;
+      --secondary-color: #845EC2;
+      --accent-color: #00C9A7;
       --bg-gradient-start: #ff9a9e;
       --bg-gradient-end: #fad0c4;
       --text-dark: #333;
       --text-light: #777;
       --white: #fff;
       --container-shadow: 0 10px 30px rgba(0, 0, 0, 0.15), 0 0 40px rgba(255, 105, 135, 0.3);
+      --transition-speed: 0.5s;
     }
     
     * {
@@ -34,6 +37,7 @@
       overflow-x: hidden;
       transition: background 0.5s ease;
       position: relative;
+      color: var(--text-dark);
     }
     
     body::before {
@@ -47,19 +51,25 @@
       z-index: -1;
     }
     
+    .wrapper {
+      width: 90%;
+      max-width: 1200px;
+      position: relative;
+    }
+    
     .container {
       display: none;
-      text-align: center;
-      width: 90%;
-      max-width: 800px;
+      width: 100%;
+      min-height: 500px;
       background: rgba(255, 255, 255, 0.97);
-      padding: 30px;
+      padding: 40px;
       border-radius: 20px;
       box-shadow: var(--container-shadow);
       backdrop-filter: blur(10px);
       position: relative;
       overflow: hidden;
       transition: all 0.5s ease;
+      margin-bottom: 20px;
     }
     
     .container::after {
@@ -69,7 +79,7 @@
       left: 0;
       right: 0;
       height: 5px;
-      background: linear-gradient(90deg, var(--primary-color), var(--primary-dark), var(--primary-color));
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color));
       border-radius: 0 0 20px 20px;
     }
     
@@ -81,6 +91,8 @@
       font-weight: 700;
       position: relative;
       display: inline-block;
+      text-align: center;
+      width: 100%;
     }
     
     h1::after {
@@ -91,8 +103,29 @@
       transform: translateX(-50%);
       width: 80px;
       height: 4px;
-      background: linear-gradient(90deg, var(--primary-color), var(--primary-dark));
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
       border-radius: 2px;
+    }
+    
+    h2 {
+      font-size: clamp(1.4rem, 4vw, 2.2rem);
+      color: var(--secondary-color);
+      margin: 30px 0 20px;
+      position: relative;
+    }
+    
+    .content-section {
+      position: relative;
+      padding: 20px 0;
+      display: none;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    
+    .content-section.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
     
     p {
@@ -100,18 +133,15 @@
       color: var(--text-dark);
       line-height: 1.9;
       margin-bottom: 20px;
-      display: none;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
+      text-align: justify;
     }
     
-    p.visible {
-      opacity: 1;
-      transform: translateY(0);
+    .highlight {
+      color: var(--primary-dark);
+      font-weight: 600;
     }
     
-    button {
+    .btn {
       padding: 12px 28px;
       font-size: 1.1rem;
       background: linear-gradient(45deg, var(--primary-color), var(--primary-dark));
@@ -119,14 +149,32 @@
       border: none;
       border-radius: 50px;
       cursor: pointer;
-      margin-top: 25px;
+      margin: 15px 10px;
       transition: all 0.3s ease;
       box-shadow: 0 5px 15px rgba(255, 111, 145, 0.4);
       position: relative;
       overflow: hidden;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
     }
     
-    button::before {
+    .btn i {
+      margin-left: 8px;
+      transition: transform 0.3s ease;
+    }
+    
+    .btn.secondary {
+      background: linear-gradient(45deg, var(--secondary-color), #6B4E9E);
+      box-shadow: 0 5px 15px rgba(132, 94, 194, 0.4);
+    }
+    
+    .btn.accent {
+      background: linear-gradient(45deg, var(--accent-color), #00A389);
+      box-shadow: 0 5px 15px rgba(0, 201, 167, 0.4);
+    }
+    
+    .btn::before {
       content: '';
       position: absolute;
       top: 0;
@@ -137,30 +185,170 @@
       transition: 0.6s;
     }
     
-    button:hover {
+    .btn:hover {
       transform: translateY(-3px);
       box-shadow: 0 8px 20px rgba(255, 111, 145, 0.6);
     }
     
-    button:hover::before {
+    .btn.secondary:hover {
+      box-shadow: 0 8px 20px rgba(132, 94, 194, 0.6);
+    }
+    
+    .btn.accent:hover {
+      box-shadow: 0 8px 20px rgba(0, 201, 167, 0.6);
+    }
+    
+    .btn:hover i {
+      transform: translateX(5px);
+    }
+    
+    .btn:hover::before {
       left: 100%;
     }
     
-    button:active {
+    .btn:active {
       transform: translateY(0);
+    }
+    
+    .navigation {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+    
+    .timeline {
+      padding: 30px 0;
+      position: relative;
+      margin: 40px 0;
+    }
+    
+    .timeline::before {
+      content: '';
+      position: absolute;
+      height: 100%;
+      width: 4px;
+      background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 2px;
+    }
+    
+    .timeline-item {
+      margin-bottom: 40px;
+      position: relative;
+      display: flex;
+      width: 100%;
+    }
+    
+    .timeline-item:nth-child(odd) {
+      justify-content: flex-start;
+    }
+    
+    .timeline-item:nth-child(even) {
+      justify-content: flex-end;
+    }
+    
+    .timeline-content {
+      width: 45%;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      position: relative;
+    }
+    
+    .timeline-item:nth-child(odd) .timeline-content::after {
+      content: '';
+      position: absolute;
+      right: -15px;
+      top: 20px;
+      width: 0;
+      height: 0;
+      border-top: 15px solid transparent;
+      border-bottom: 15px solid transparent;
+      border-left: 15px solid rgba(255, 255, 255, 0.9);
+    }
+    
+    .timeline-item:nth-child(even) .timeline-content::after {
+      content: '';
+      position: absolute;
+      left: -15px;
+      top: 20px;
+      width: 0;
+      height: 0;
+      border-top: 15px solid transparent;
+      border-bottom: 15px solid transparent;
+      border-right: 15px solid rgba(255, 255, 255, 0.9);
+    }
+    
+    .timeline-date {
+      background: var(--primary-color);
+      color: white;
+      border-radius: 20px;
+      padding: 5px 15px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+    
+    .timeline-dot {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: var(--accent-color);
+      border-radius: 50%;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      box-shadow: 0 0 0 4px rgba(0, 201, 167, 0.3);
+      z-index: 1;
+    }
+    
+    .quotes-section {
+      text-align: center;
+      padding: 20px 0;
+    }
+    
+    .quote {
+      font-style: italic;
+      font-size: 1.2rem;
+      color: var(--secondary-color);
+      position: relative;
+      padding: 0 40px;
+      margin: 30px 0;
+    }
+    
+    .quote::before, .quote::after {
+      content: '"';
+      font-size: 3rem;
+      color: rgba(132, 94, 194, 0.3);
+      position: absolute;
+    }
+    
+    .quote::before {
+      top: -20px;
+      left: 0;
+    }
+    
+    .quote::after {
+      bottom: -40px;
+      right: 0;
     }
     
     .pin-container {
       text-align: center;
       background: rgba(255, 255, 255, 0.97);
-      padding: 30px;
+      padding: 40px;
       border-radius: 20px;
       box-shadow: var(--container-shadow);
-      width: 90%;
-      max-width: 400px;
+      width: 100%;
+      max-width: 500px;
       position: relative;
       overflow: hidden;
       backdrop-filter: blur(10px);
+      margin: 0 auto;
     }
     
     .pin-container::after {
@@ -170,37 +358,46 @@
       left: 0;
       right: 0;
       height: 5px;
-      background: linear-gradient(90deg, var(--primary-color), var(--primary-dark), var(--primary-color));
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color));
       border-radius: 0 0 20px 20px;
     }
     
     .security-icon {
-      font-size: 3rem;
+      font-size: 3.5rem;
       color: var(--primary-color);
       margin-bottom: 15px;
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
     }
     
     .pin-input-container {
       display: flex;
       justify-content: center;
-      margin: 20px 0;
+      margin: 25px 0;
     }
     
     .pin-digit {
-      width: 45px;
-      height: 55px;
-      margin: 0 5px;
-      font-size: 1.4rem;
+      width: 60px;
+      height: 70px;
+      margin: 0 8px;
+      font-size: 1.6rem;
       text-align: center;
       border: 2px solid #ddd;
-      border-radius: 10px;
+      border-radius: 12px;
       outline: none;
       transition: all 0.3s ease;
+      box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
     }
     
     .pin-digit:focus {
       border-color: var(--primary-color);
-      box-shadow: 0 0 5px rgba(255, 111, 145, 0.5);
+      box-shadow: 0 0 10px rgba(255, 111, 145, 0.3), inset 0 2px 5px rgba(0,0,0,0.05);
+      transform: translateY(-2px);
     }
     
     #wrong-pin {
@@ -216,26 +413,84 @@
       20%, 40%, 60%, 80% { transform: translateX(5px); }
     }
     
-    audio {
+    .security-tips {
+      background: rgba(0, 201, 167, 0.1);
+      padding: 15px;
+      border-radius: 10px;
       margin-top: 25px;
-      width: 100%;
-      max-width: 300px;
+      font-size: 0.9rem;
+      color: var(--text-light);
+      text-align: left;
+      border-left: 3px solid var(--accent-color);
+    }
+    
+    .security-tips h3 {
+      color: var(--accent-color);
+      margin-bottom: 10px;
+      font-size: 1rem;
+    }
+    
+    .security-tips ul {
+      padding-left: 20px;
+      margin: 10px 0;
+    }
+    
+    .audio-player {
+      margin: 30px auto;
+      max-width: 350px;
+      background: rgba(255, 255, 255, 0.8);
       border-radius: 50px;
+      padding: 5px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
       display: none;
+    }
+    
+    audio {
+      width: 100%;
+      border-radius: 50px;
+      outline: none;
     }
     
     audio::-webkit-media-controls-panel {
       background-color: rgba(255, 111, 145, 0.1);
     }
     
-    .copyright {
-      font-size: 0.85rem;
-      color: var(--text-light);
-      margin-top: 30px;
-      opacity: 0.8;
+    audio::-webkit-media-controls-play-button {
+      background-color: var(--primary-color);
+      border-radius: 50%;
     }
     
-    .floating-hearts {
+    .mood-selector {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 20px 0;
+    }
+    
+    .mood-btn {
+      padding: 8px 15px;
+      margin: 5px;
+      border-radius: 20px;
+      border: none;
+      background: rgba(255, 255, 255, 0.8);
+      color: var(--text-dark);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .mood-btn:hover {
+      background: var(--primary-color);
+      color: white;
+    }
+    
+    .mood-btn.active {
+      background: var(--primary-color);
+      color: white;
+      box-shadow: 0 3px 10px rgba(255, 111, 145, 0.4);
+    }
+    
+    .heart-animation {
       position: fixed;
       top: 0;
       left: 0;
@@ -250,45 +505,110 @@
       position: absolute;
       width: 30px;
       height: 30px;
-      pointer-events: none;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='rgba(255,111,145,0.6)' d='M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z'%3E%3C/path%3E%3C/svg%3E");
       background-size: contain;
       opacity: 0;
       animation: floating 10s linear infinite;
     }
     
+    .stars {
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 576 512'%3E%3Cpath fill='rgba(255,215,0,0.6)' d='M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z'%3E%3C/path%3E%3C/svg%3E");
+      background-size: contain;
+      opacity: 0;
+      animation: star-floating 12s linear infinite;
+    }
+    
     @keyframes floating {
       0% {
         opacity: 0;
-        transform: translateY(0) rotate(0deg);
+        transform: translateY(0) rotate(0deg) scale(0.5);
       }
       10% {
         opacity: 0.7;
+        transform: translateY(-5vh) rotate(36deg) scale(0.6);
+      }
+      50% {
+        transform: translateY(-50vh) rotate(180deg) scale(1);
       }
       90% {
         opacity: 0.7;
+        transform: translateY(-95vh) rotate(324deg) scale(0.6);
       }
       100% {
         opacity: 0;
-        transform: translateY(-100vh) rotate(360deg);
-      }
-    }
-
-    @media (max-width: 600px) {
-      .container {
-        padding: 20px 15px;
-      }
-      
-      .pin-digit {
-        width: 40px;
-        height: 50px;
-        font-size: 1.2rem;
+        transform: translateY(-100vh) rotate(360deg) scale(0.5);
       }
     }
     
-    /* Modern scrollbar */
+    @keyframes star-floating {
+      0% {
+        opacity: 0;
+        transform: translateY(0) rotate(0deg) scale(0.5);
+      }
+      10% {
+        opacity: 0.7;
+        transform: translateY(-5vh) rotate(45deg) scale(0.7);
+      }
+      80% {
+        opacity: 0.7;
+        transform: translateY(-80vh) rotate(315deg) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-100vh) rotate(360deg) scale(0.5);
+      }
+    }
+    
+    .loading {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.9);
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+    
+    .loading-spinner {
+      width: 60px;
+      height: 60px;
+      border: 5px solid rgba(255, 111, 145, 0.3);
+      border-radius: 50%;
+      border-top-color: var(--primary-color);
+      animation: spin 1s ease-in-out infinite;
+    }
+    
+    .loading-text {
+      margin-top: 20px;
+      font-size: 1.2rem;
+      color: var(--primary-color);
+      text-align: center;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    .footer {
+      text-align: center;
+      padding: 20px 0;
+      color: var(--text-light);
+      font-size: 0.9rem;
+      opacity: 0.8;
+      margin-top: 30px;
+    }
+    
+    /* Custom scrollbar */
     ::-webkit-scrollbar {
-      width: 8px;
+      width: 10px;
     }
     
     ::-webkit-scrollbar-track {
@@ -297,103 +617,344 @@
     }
     
     ::-webkit-scrollbar-thumb {
-      background: var(--primary-color);
+      background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
       border-radius: 10px;
     }
     
     ::-webkit-scrollbar-thumb:hover {
-      background: var(--primary-dark);
+      background: linear-gradient(to bottom, var(--primary-dark), var(--secondary-color));
     }
     
-    /* Loading animation */
-    .loading {
-      display: none;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+    /* Progress bar */
+    .progress-container {
+      width: 100%;
+      height: 5px;
+      background: rgba(255, 255, 255, 0.3);
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 9999;
     }
     
-    .loading-spinner {
-      width: 50px;
-      height: 50px;
-      border: 5px solid rgba(255, 111, 145, 0.3);
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+    
+    /* Notification */
+    .notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 15px 20px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      display: flex;
+      align-items: center;
+      transform: translateX(120%);
+      transition: transform 0.5s ease;
+      z-index: 9999;
+    }
+    
+    .notification.show {
+      transform: translateX(0);
+    }
+    
+    .notification i {
+      color: var(--primary-color);
+      font-size: 1.5rem;
+      margin-right: 10px;
+    }
+    
+    /* Themes */
+    .theme-selector {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 999;
+    }
+    
+    .theme-btn {
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
-      border-top-color: var(--primary-color);
-      animation: spin 1s ease-in-out infinite;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+      margin: 5px;
+      transition: transform 0.3s ease;
     }
     
-    @keyframes spin {
-      to { transform: rotate(360deg); }
+    .theme-btn:hover {
+      transform: scale(1.1);
+    }
+    
+    .theme-standard {
+      background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+    }
+    
+    .theme-dark {
+      background: linear-gradient(135deg, #2C3E50, #4A5568);
+    }
+    
+    .theme-sunset {
+      background: linear-gradient(135deg, #FF416C, #FF4B2B);
+    }
+    
+    .dark-mode {
+      --bg-gradient-start: #2C3E50;
+      --bg-gradient-end: #4A5568;
+      --text-dark: #E2E8F0;
+      --text-light: #A0AEC0;
+    }
+    
+    .sunset-mode {
+      --bg-gradient-start: #FF416C;
+      --bg-gradient-end: #FF4B2B;
+    }
+    
+    /* Responsive design */
+    @media (max-width: 768px) {
+      .container {
+        padding: 25px 20px;
+      }
+      
+      .timeline::before {
+        left: 30px;
+      }
+      
+      .timeline-item {
+        justify-content: flex-start;
+        padding-left: 60px;
+      }
+      
+      .timeline-content {
+        width: 100%;
+      }
+      
+      .timeline-dot {
+        left: 30px;
+      }
+      
+      .timeline-item:nth-child(even) .timeline-content::after {
+        left: -15px;
+        border-right: 15px solid rgba(255, 255, 255, 0.9);
+        border-left: none;
+      }
+      
+      .timeline-item:nth-child(odd) .timeline-content::after {
+        left: -15px;
+        border-right: 15px solid rgba(255, 255, 255, 0.9);
+        border-left: none;
+      }
+      
+      .pin-digit {
+        width: 45px;
+        height: 55px;
+        font-size: 1.3rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .container {
+        padding: 20px 15px;
+      }
+      
+      h1 {
+        font-size: 1.8rem;
+      }
+      
+      .pin-digit {
+        width: 40px;
+        height: 50px;
+        font-size: 1.2rem;
+        margin: 0 5px;
+      }
+      
+      .btn {
+        padding: 10px 20px;
+        font-size: 1rem;
+        margin: 10px 5px;
+      }
     }
   </style>
 </head>
 <body oncontextmenu="return false">
-  <div class="floating-hearts" id="floating-hearts"></div>
+  <div class="progress-container">
+    <div class="progress-bar" id="progress-bar"></div>
+  </div>
+  
+  <div class="heart-animation" id="heart-animation"></div>
+  
+  <div class="notification" id="notification">
+    <i class="fas fa-heart"></i>
+    <span id="notification-text">Welcome to our story!</span>
+  </div>
   
   <div class="loading" id="loading">
     <div class="loading-spinner"></div>
-  </div>
-
-  <div class="pin-container" id="pin-container">
-    <div class="security-icon">
-      <i class="fas fa-lock"></i>
-    </div>
-    <h1>Secure Access</h1>
-    <p>Enter PIN to access your special note</p>
-    
-    <div class="pin-input-container">
-      <input type="password" class="pin-digit" maxlength="1" id="pin-1" autofocus>
-      <input type="password" class="pin-digit" maxlength="1" id="pin-2">
-      <input type="password" class="pin-digit" maxlength="1" id="pin-3">
-      <input type="password" class="pin-digit" maxlength="1" id="pin-4">
-    </div>
-    
-    <button onclick="verifyPin()">Unlock <i class="fas fa-heart"></i></button>
-    <p id="wrong-pin"><i class="fas fa-exclamation-circle"></i> Incorrect PIN. Please try again.</p>
-    
-    <div class="copyright">
-      Secured with ❤️ | Attempts remaining: <span id="attempts">5</span>
+    <div class="loading-text">
+      Loading our special moments<br>
+      <span id="loading-progress">0%</span>
     </div>
   </div>
 
-  <div class="container" id="note-container">
-    <h1>Our Special Story ❤️</h1>
-    <p id="para-1">
-      It was something we both didn't expect—that we would one day fall in love.  
-      We were just friends, normal friends, who interacted online but not much.
-    </p>
-    <p id="para-2">
-      One day, I realized you were the person I wanted in my life.  
-      We met for the first time on <b>1st November</b> at Shopping Centre in Kenyatta University.  
-      At that moment, I could feel how special you were to me.
-    </p>
-    <p id="para-3">
-      It has been <b><span id="days-counter">164</span> days</b> since that day, and now we meet again today.  
-      I'll never forget how shy you were, how you faced the wall so others couldn't see you.  
-      That moment made me realize how precious and unique you are.
-    </p>
-    <p id="para-4">
-      Sharlyn, you have made these days some of the happiest in my life, and I'm so grateful for every moment with you.  
-      I promise to cherish and love you always.
-    </p>
-    <button onclick="revealNextParagraph()">Tap to Reveal the Next Part <i class="fas fa-chevron-right"></i></button>
-    <audio id="bg-music" controls loop>
-      <source src="music.mp3" type="audio/mpeg">
-      Your browser does not support the audio element.
-    </audio>
-    <div class="copyright">
-      © 2025 Brian and Sharlyn. All Rights Reserved.
+  <div class="theme-selector">
+    <button class="theme-btn theme-standard" onclick="changeTheme('standard')" title="Standard Theme"></button>
+    <button class="theme-btn theme-dark" onclick="changeTheme('dark')" title="Dark Theme"></button>
+    <button class="theme-btn theme-sunset" onclick="changeTheme('sunset')" title="Sunset Theme"></button>
+  </div>
+
+  <div class="wrapper">
+    <div class="pin-container" id="pin-container">
+      <div class="security-icon">
+        <i class="fas fa-lock"></i>
+      </div>
+      <h1>Secure Access</h1>
+      <p>Enter the PIN to unlock our special journey</p>
+      
+      <div class="pin-input-container">
+        <input type="password" class="pin-digit" maxlength="1" id="pin-1" autofocus>
+        <input type="password" class="pin-digit" maxlength="1" id="pin-2">
+        <input type="password" class="pin-digit" maxlength="1" id="pin-3">
+        <input type="password" class="pin-digit" maxlength="1" id="pin-4">
+      </div>
+      
+      <button class="btn" onclick="verifyPin()">Unlock <i class="fas fa-heart"></i></button>
+      <p id="wrong-pin"><i class="fas fa-exclamation-circle"></i> Incorrect PIN. Please try again.</p>
+      
+      <div class="security-tips">
+        <h3><i class="fas fa-shield-alt"></i> Security Tips</h3>
+        <ul>
+          <li>This is a personal message with private content</li>
+          <li>Only intended for Sharlyn's eyes</li>
+          <li>Your remaining attempts: <span id="attempts">5</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="container" id="note-container">
+      <div class="audio-player">
+        <audio id="bg-music" controls loop>
+          <source src="music.mp3" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+      
+      <h1>Our Special Journey ❤️</h1>
+      
+      <div class="mood-selector">
+        <button class="mood-btn active" onclick="changeMood('romantic')">Romantic</button>
+        <button class="mood-btn" onclick="changeMood('cheerful')">Cheerful</button>
+        <button class="mood-btn" onclick="changeMood('nostalgic')">Nostalgic</button>
+      </div>
+      
+      <div class="content-section" id="section-intro">
+        <h2>How It All Began</h2>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-date">The Beginning</div>
+              <p>
+                It was something neither of us expected—that fate would intertwine our paths.
+                We were just friends, casual acquaintances who interacted online but not much beyond the digital realm.
+                Little did we know that those simple exchanges would blossom into something beautiful.
+              </p>
+            </div>
+          </div>
+          
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-date">The Realization</div>
+              <p>
+                One day, like the sun breaking through clouds, I realized you were the person I wanted in my life.
+                Not just as a friend, but as someone special who could share in life's journey with me.
+                It was a quiet revelation, but one that changed everything.
+              </p>
+            </div>
+          </div>
+          
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-date">November 1st</div>
+              <p>
+                We met for the first time on <span class="highlight">1st November</span> at the Shopping Centre in Kenyatta University.
+                The world seemed to pause in that moment, and I could feel how special you were to me.
+                Your smile, your voice—everything about you made that day unforgettable.
+              </p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="quotes-section">
+          <div class="quote">
+            "Sometimes the heart sees what is invisible to the eye."
+          </div>
+        </div>
+      </div>
+      
+      <div class="content-section" id="section-journey">
+        <h2>Our Journey Together</h2>
+        <p>
+          It has been <span class="highlight"><span id="days-counter">164</span> days</span> since that first meeting, and now we come together again today.
+          Each day has been a treasure, a gift that I cherish deeply.
+        </p>
+        <p>
+          I'll never forget how shy you were that day, how you faced the wall so others couldn't see you.
+          That endearing moment made me realize how precious and unique you are.
+          Your genuine nature, your authentic self—these are the qualities that drew me to you.
+        </p>
+        <div class="quotes-section">
+          <div class="quote">
+            "In all the world, there is no heart for me like yours."
+          </div>
+        </div>
+      </div>
+      
+      <div class="content-section" id="section-promise">
+        <h2>My Promise To You</h2>
+        <p>
+          Sharlyn, you have transformed ordinary days into extraordinary memories. You've filled my life with joy, laughter, and meaning in ways I never thought possible.
+        </p>
+        <p>
+          I promise to be there for you through every sunrise and sunset. To cherish the beautiful moments and stand by you through the challenges.
+          I promise to listen when you need to be heard, to comfort when you need support, and to celebrate when you achieve your dreams.
+        </p>
+        <p>
+          Most importantly, I promise to love you genuinely and completely, today and always.
+        </p>
+        <div class="quotes-section">
+          <div class="quote">
+            "Love is not about how many days, months, or years you have been together. Love is about how much you love each other every single day."
+          </div>
+        </div>
+      </div>
+      
+      <div class="navigation">
+        <button class="btn" id="prev-btn" onclick="navigateSection('prev')"><i class="fas fa-chevron-left"></i> Previous</button>
+        <button class="btn accent" onclick="showAllSections()">View All</button>
+        <button class="btn secondary" onclick="playMusic()">Play Music</button>
+        <button class="btn" id="next-btn" onclick="navigateSection('next')">Next <i class="fas fa-chevron-right"></i></button>
+      </div>
+      
+      <div class="footer">
+        © 2025 Brian and Sharlyn. All Rights Reserved. | Created with ❤️
+      </div>
     </div>
   </div>
 
   <script>
-    // Prevent right-click on the entire page
+    // Enhanced security: Prevent right-click and keyboard shortcuts
     document.addEventListener('contextmenu', event => event.preventDefault());
     
-    // Prevent keyboard shortcut copying
     document.addEventListener('keydown', function(e) {
-      if ((e.ctrlKey || e.metaKey) && (e.key === 'c' || e.key === 's' || e.key === 'u' || e.key === 'p')) {
+      if ((e.ctrlKey || e.metaKey) && (e.key === 'c' || e.key === 's' || e.key === 'u' || e.key === 'p' || e.key === 'a')) {
         e.preventDefault();
         return false;
       }
@@ -408,17 +969,25 @@
     const music = document.getElementById("bg-music");
     const loading = document.getElementById("loading");
     const attemptsDisplay = document.getElementById("attempts");
+    const progressBar = document.getElementById("progress-bar");
     let attempts = 5;
-    let currentParagraph = 0;
+    let currentSection = 0;
     let isLocked = false;
     let lockoutTimer = null;
     
-    // Auto-focus between PIN fields
+    // Get all content sections
+    const sections = document.querySelectorAll('.content-section');
+    const sectionIds = ['section-intro', 'section-journey', 'section-promise'];
+    
+    // Auto-focus between PIN fields with enhanced user experience
     pinDigits.forEach((digit, index) => {
       digit.addEventListener('input', function() {
         if (this.value.length === this.maxLength) {
           if (index < pinDigits.length - 1) {
             pinDigits[index + 1].focus();
+          } else {
+            // Auto-submit when last digit is entered
+            verifyPin();
           }
         }
       });
@@ -434,12 +1003,21 @@
           verifyPin();
         }
       });
+      
+      // Add focus and blur effects
+      digit.addEventListener('focus', function() {
+        this.style.transform = 'translateY(-5px)';
+      });
+      
+      digit.addEventListener('blur', function() {
+        this.style.transform = 'translateY(0)';
+      });
     });
     
-    // PIN verification function with enhanced security
+    // Enhanced PIN verification function with improved security
     function verifyPin() {
       if (isLocked) {
-        showError("Too many attempts. Please try again later.");
+        showError("Access temporarily restricted. Please wait.");
         return;
       }
       
@@ -448,65 +1026,92 @@
       if (enteredPin === correctPin) {
         wrongPinMessage.style.display = "none";
         pinContainer.style.display = "none";
-        loading.style.display = "block";
+        loading.style.display = "flex";
         
-        // Simulate loading for security theater
-        setTimeout(() => {
-          loading.style.display = "none";
-          noteContainer.style.display = "block";
-          music.style.display = "block";
-          music.play().catch(e => console.log("Autoplay prevented: User interaction required"));
+        // Simulate progressive loading for enhanced experience
+        let progress = 0;
+        const loadingInterval = setInterval(() => {
+          progress += Math.floor(Math.random() * 10) + 1;
+          if (progress > 100) progress = 100;
           
-          // Calculate days since November 1, 2023
-          updateDaysCounter();
+          document.getElementById('loading-progress').textContent = `${progress}%`;
+          progressBar.style.width = `${progress}%`;
           
-          // Start the heart animation
-          createHearts();
-          
-          // Reveal the first paragraph immediately
-          revealNextParagraph();
-        }, 1500);
+          if (progress === 100) {
+            clearInterval(loadingInterval);
+            setTimeout(() => {
+              loading.style.display = "none";
+              noteContainer.style.display = "block";
+              music.parentElement.style.display = "block";
+              
+              // Try to play music (might need user interaction)
+              playMusic();
+              
+              // Update days counter
+              updateDaysCounter();
+              
+              // Start animations
+              startHeartAndStarAnimation();
+              
+              // Show first section
+              showSection(0);
+              
+              // Show welcome notification
+              showNotification("Welcome to our special journey! ❤️");
+              
+              // Progress bar update for scrolling
+              window.addEventListener('scroll', updateProgressBar);
+            }, 500);
+          }
+        }, 200);
       } else {
         attempts--;
         attemptsDisplay.textContent = attempts;
         
-        // Handle failed attempts
+        // Handle failed attempts with enhanced security
         if (attempts <= 0) {
           lockAccount();
         } else {
-          showError("Incorrect PIN. Please try again.");
-          // Clear all inputs
+          const remainingText = attempts === 1 ? "1 attempt" : `${attempts} attempts`;
+          showError(`Incorrect PIN. ${remainingText} remaining.`);
+          
+          // Clear all inputs for better security
           pinDigits.forEach(input => input.value = '');
           pinDigits[0].focus();
         }
       }
     }
     
-    // Lock account after too many attempts
+    // Enhanced account locking mechanism
     function lockAccount() {
       isLocked = true;
-      showError("Too many attempts. Account locked for 30 seconds.");
       
-      pinDigits.forEach(input => {
-        input.disabled = true;
-        input.value = '';
-      });
-      
-      document.querySelector('.pin-container button').disabled = true;
-      
-      // Set a timer to unlock
-      lockoutTimer = setTimeout(() => {
-        isLocked = false;
-        attempts = 5;
-        attemptsDisplay.textContent = attempts;
-        pinDigits.forEach(input => input.disabled = false);
-        document.querySelector('.pin-container button').disabled = false;
-        wrongPinMessage.style.display = "none";
-        pinDigits[0].focus();
-      }, 30000); // 30 seconds lockout
+      let lockTime = 30;
+      const lockInterval = setInterval(() => {
+        lockTime--;
+        showError(`Access restricted. Try again in ${lockTime} seconds.`);
+        
+        pinDigits.forEach(input => {
+          input.disabled = true;
+          input.value = '';
+        });
+        
+        document.querySelector('.pin-container .btn').disabled = true;
+        
+        if (lockTime <= 0) {
+          clearInterval(lockInterval);
+          isLocked = false;
+          attempts = 5;
+          attemptsDisplay.textContent = attempts;
+          pinDigits.forEach(input => input.disabled = false);
+          document.querySelector('.pin-container .btn').disabled = false;
+          wrongPinMessage.style.display = "none";
+          pinDigits[0].focus();
+        }
+      }, 1000);
     }
     
-    // Show error message with animation
+    // Enhanced error display
     function showError(message) {
       wrongPinMessage.textContent = message;
       wrongPinMessage.style.display = "block";
@@ -516,101 +1121,212 @@
       }, 10);
     }
     
-    // Calculate and update days counter
+    // Calculate and update days counter with animation
     function updateDaysCounter() {
       const startDate = new Date(2023, 10, 1); // November 1, 2023 (month is 0-indexed)
       const today = new Date();
       const differenceInTime = today - startDate;
       const differenceInDays = Math.floor(differenceInTime / (1000 * 3600 * 24));
       
-      document.getElementById('days-counter').textContent = differenceInDays;
-    }
-    
-    // Create floating hearts animation
-    function createHearts() {
-      const floatingHearts = document.getElementById('floating-hearts');
+      const counter = document.getElementById('days-counter');
       
-      // Create 20 hearts
-      for (let i = 0; i < 20; i++) {
-        setTimeout(() => {
-          const heart = document.createElement('div');
-          heart.classList.add('heart');
-          
-          // Random position, size and animation duration
-          const size = Math.random() * 20 + 15;
-          const left = Math.random() * 100;
-          const animationDuration = Math.random() * 10 + 5;
-          
-          heart.style.left = `${left}%`;
-          heart.style.bottom = '-50px';
-          heart.style.width = `${size}px`;
-          heart.style.height = `${size}px`;
-          heart.style.animationDuration = `${animationDuration}s`;
-          heart.style.animationDelay = `${Math.random() * 5}s`;
-          
-          floatingHearts.appendChild(heart);
-          
-          // Remove heart after animation completes
-          setTimeout(() => {
-            heart.remove();
-          }, animationDuration * 1000);
-        }, i * 1000);
-      }
-      
-      // Continue creating hearts periodically
-      setInterval(createHeartBatch, 10000);
-    }
-    
-    function createHeartBatch() {
-      const floatingHearts = document.getElementById('floating-hearts');
-      
-      for (let i = 0; i < 5; i++) {
-        const heart = document.createElement('div');
-        heart.classList.add('heart');
-        
-        const size = Math.random() * 20 + 15;
-        const left = Math.random() * 100;
-        const animationDuration = Math.random() * 10 + 5;
-        
-        heart.style.left = `${left}%`;
-        heart.style.bottom = '-50px';
-        heart.style.width = `${size}px`;
-        heart.style.height = `${size}px`;
-        heart.style.animationDuration = `${animationDuration}s`;
-        
-        floatingHearts.appendChild(heart);
-        
-        setTimeout(() => {
-          heart.remove();
-        }, animationDuration * 1000);
-      }
-    }
-    
-    // Reveal paragraphs one by one with animation
-    function revealNextParagraph() {
-      const paragraphs = document.querySelectorAll("#note-container p");
-      
-      if (currentParagraph < paragraphs.length) {
-        const paragraph = paragraphs[currentParagraph];
-        paragraph.style.display = "block";
-        
-        // Trigger animation
-        setTimeout(() => {
-          paragraph.classList.add('visible');
-        }, 50);
-        
-        currentParagraph++;
-        
-        // Hide button if all paragraphs are revealed
-        if (currentParagraph >= paragraphs.length) {
-          document.querySelector("#note-container button").style.display = "none";
+      // Animate the counter
+      let currentCount = 0;
+      const increment = Math.ceil(differenceInDays / 50);
+      const interval = setInterval(() => {
+        currentCount += increment;
+        if (currentCount >= differenceInDays) {
+          currentCount = differenceInDays;
+          clearInterval(interval);
         }
+        counter.textContent = currentCount;
+      }, 30);
+    }
+    
+    // Heart and star animation with enhanced visuals
+    function startHeartAndStarAnimation() {
+      const heartContainer = document.getElementById('heart-animation');
+      
+      // Create initial batch of hearts and stars
+      for (let i = 0; i < 15; i++) {
+        createHeartOrStar();
+      }
+      
+      // Create new hearts and stars periodically
+      setInterval(createHeartOrStar, 2000);
+      
+      function createHeartOrStar() {
+        const isHeart = Math.random() > 0.3;
+        const element = document.createElement('div');
+        element.classList.add(isHeart ? 'heart' : 'stars');
+        
+        const size = Math.random() * 20 + (isHeart ? 15 : 10);
+        const left = Math.random() * 100;
+        const delay = Math.random() * 3;
+        const duration = Math.random() * 10 + 5;
+        
+        element.style.left = `${left}%`;
+        element.style.bottom = '-50px';
+        element.style.width = `${size}px`;
+        element.style.height = `${size}px`;
+        element.style.animationDuration = `${duration}s`;
+        element.style.animationDelay = `${delay}s`;
+        
+        heartContainer.appendChild(element);
+        
+        // Remove element after animation completes
+        setTimeout(() => {
+          element.remove();
+        }, (duration + delay) * 1000);
       }
     }
     
-    // Window load event
+    // Section navigation with smooth transitions
+    function showSection(index) {
+      if (index < 0) index = 0;
+      if (index >= sections.length) index = sections.length - 1;
+      
+      currentSection = index;
+      
+      sections.forEach((section, i) => {
+        section.style.display = i === index ? 'block' : 'none';
+        
+        if (i === index) {
+          setTimeout(() => {
+            section.classList.add('visible');
+          }, 100);
+        } else {
+          section.classList.remove('visible');
+        }
+      });
+      
+      // Update navigation buttons
+      document.getElementById('prev-btn').disabled = index === 0;
+      document.getElementById('next-btn').disabled = index === sections.length - 1;
+      
+      // Scroll to top of section
+      window.scrollTo({
+        top: sections[index].offsetTop - 50,
+        behavior: 'smooth'
+      });
+    }
+    
+    function navigateSection(direction) {
+      const nextIndex = direction === 'next' ? currentSection + 1 : currentSection - 1;
+      showSection(nextIndex);
+    }
+    
+    // Show all sections function
+    function showAllSections() {
+      sections.forEach(section => {
+        section.style.display = 'block';
+        setTimeout(() => {
+          section.classList.add('visible');
+        }, 100);
+      });
+      
+      document.querySelector('.navigation').innerHTML = `
+        <button class="btn secondary" onclick="playMusic()">Play Music</button>
+        <button class="btn accent" onclick="showSection(0)">Return to Beginning</button>
+      `;
+    }
+    
+    // Play music function with user experience enhancements
+    function playMusic() {
+      music.play().then(() => {
+        showNotification("Music is now playing ♫");
+      }).catch(e => {
+        showNotification("Click again to play music ♫");
+      });
+    }
+    
+    // Theme changer
+    function changeTheme(theme) {
+      const body = document.body;
+      body.classList.remove('dark-mode', 'sunset-mode');
+      
+      if (theme === 'dark') {
+        body.classList.add('dark-mode');
+        showNotification("Dark theme activated");
+      } else if (theme === 'sunset') {
+        body.classList.add('sunset-mode');
+        showNotification("Sunset theme activated");
+      } else {
+        showNotification("Standard theme activated");
+      }
+    }
+    
+    // Mood changer function for content presentation
+    function changeMood(mood) {
+      const moodButtons = document.querySelectorAll('.mood-btn');
+      moodButtons.forEach(btn => btn.classList.remove('active'));
+      
+      document.querySelector(`.mood-btn[onclick="changeMood('${mood}')"]`).classList.add('active');
+      
+      const container = document.getElementById('note-container');
+      container.className = 'container';
+      container.classList.add(`mood-${mood}`);
+      
+      // Change backgrounds and colors based on mood
+      if (mood === 'romantic') {
+        document.body.style.background = `linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end))`;
+        showNotification("Romantic mood set ❤️");
+      } else if (mood === 'cheerful') {
+        document.body.style.background = `linear-gradient(135deg, #FFD166, #FF9A3C)`;
+        showNotification("Cheerful mood set 😊");
+      } else if (mood === 'nostalgic') {
+        document.body.style.background = `linear-gradient(135deg, #8BC6EC, #9599E2)`;
+        showNotification("Nostalgic mood set ✨");
+      }
+    }
+    
+    // Show notification
+    function showNotification(message) {
+      const notification = document.getElementById('notification');
+      const notificationText = document.getElementById('notification-text');
+      
+      notificationText.textContent = message;
+      notification.classList.add('show');
+      
+      setTimeout(() => {
+        notification.classList.remove('show');
+      }, 3000);
+    }
+    
+    // Update progress bar based on scroll position
+    function updateProgressBar() {
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      
+      const scrolled = (scrollTop / (documentHeight - windowHeight)) * 100;
+      progressBar.style.width = scrolled + '%';
+    }
+    
+    // Initialize page
     window.addEventListener('load', function() {
       pinDigits[0].focus(); // Auto-focus first PIN field on load
+      
+      // Set up progress bar
+      progressBar.style.width = '0%';
+      
+      // Prevent form submission
+      document.addEventListener('submit', event => event.preventDefault());
+      
+      // Easter egg on special key combinations
+      const keys = [];
+      document.addEventListener('keydown', e => {
+        keys.push(e.key);
+        keys.splice(-4, keys.length - 4);
+        
+        if (keys.join('').includes('love')) {
+          const hearts = document.querySelectorAll('.heart');
+          hearts.forEach(heart => {
+            heart.style.animationDuration = '3s';
+          });
+          showNotification("Love is in the air! ❤️");
+        }
+      });
     });
   </script>
 </body>
